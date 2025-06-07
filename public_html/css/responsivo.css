@@ -1,0 +1,332 @@
+/* ============================== */
+/*           VARIÁVEIS            */
+/* ============================== */
+:root {
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-shadow: rgba(0, 0, 0, 0.15);
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --box-shadow: 0 8px 20px var(--color-shadow);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================== */
+/*    TELAS ATÉ 1024px           */
+/* ============================== */
+@media (max-width: 1024px) {
+  body {
+    font-size: 0.95rem;
+    padding-top: 100px;
+    overflow-x: hidden;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 122px;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-primary);
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    align-items: center;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    box-shadow: var(--box-shadow);
+    z-index: 100;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: 1.3em;
+    color: var(--color-white);
+    text-decoration: none;
+  }
+
+  .logo,
+  .logo-empresa {
+    width: 160px;
+    height: auto;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .header {
+    height: auto;
+    flex-direction: column;
+    padding: var(--spacing-xs);
+    align-items: center;
+    text-align: center;
+  }
+
+  .welcome-container{
+    margin-top: -3.5rem;
+  }
+
+  .welcome-banner {
+    height: auto;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    margin-top: 2rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .welcome-title {
+    font-size: 1.9rem;
+    margin: var(--spacing-sm) 0;
+    text-align: center;
+  }
+
+  .schedule-button {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.6rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .schedule-button:hover {
+    background-color: #365d43;
+  }
+
+  .description-text {
+    font-size: 1.2rem;
+    max-width: 400px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .slider-container {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .slider-btn {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .sobre-section {
+    margin-top: 4rem;
+  }
+
+  .sobre-container {
+    padding: var(--spacing-sm);
+    margin: 50px 0;
+    height: auto;
+  }
+
+  .sobre-texto-imagem {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .sobre-imagem img {
+    width: 220px;
+    height: 220px;
+  }
+
+  .sobre-texto {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .sobre-texto p {
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    margin-top: -2.8rem;
+  }
+
+  #planos .section-title {
+    margin-top: 1rem;
+  }
+
+  .plano-banner,
+  .plano-banner.reverse {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .plano-img,
+  .plano-info {
+    width: 100%;
+  }
+
+  .plano-info {
+    text-align: center;
+    padding: var(--spacing-sm);
+    gap: var(--spacing-xs);
+  }
+
+  .plano-info h3 {
+    font-size: 1.3rem;
+  }
+
+  .plano-info h4 {
+    font-size: 1.1rem;
+  }
+
+  .plano-info p {
+    font-size: 1.2rem;
+  }
+
+  .btn-plano {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.4rem 1rem;
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  #calendar {
+    padding: var(--spacing-sm);
+    margin: var(--spacing-sm);
+    overflow-x: auto;
+    min-width: 320px;
+  }
+
+  .fc-toolbar {
+    flex-direction: column !important;
+    gap: var(--spacing-sm);
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 1rem !important;
+  }
+
+  .fc .fc-toolbar button {
+    font-size: 0.8rem !important;
+    padding: 6px 10px !important;
+    flex-grow: 1;
+  }
+
+  .fc-col-header-cell-cushion {
+    font-size: 0.7rem !important;
+  }
+
+  .fc-daygrid-event {
+    font-size: 0.7rem !important;
+    padding: 2px 4px !important;
+  }
+
+  .ficha-container{
+    margin-top: 3rem;
+  }
+
+  .contact-title {
+    font-size: 1.8rem;
+  }
+
+  .phone,
+  .social-title {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .footer-menu {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    height: auto;
+    padding: var(--spacing-sm);
+    text-align: center;
+  }
+
+  .footer-menu a {
+    font-size: 1.1rem;
+  }
+
+  .signature {
+    font-size: 0.95rem;
+    text-align: center;
+    padding: var(--spacing-xs);
+  }
+
+  .modal-content {
+    width: 95%;
+    max-width: 340px;
+    font-size: 0.95rem;
+    text-align: center;
+    border-radius: var(--radius-md);
+  }
+
+  .modal-content h2 {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .modal-content input,
+  .modal-content button {
+    font-size: 1rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .auth-page {
+    margin-top: 1rem;
+  }
+
+  .auth-form input,
+  .auth-form button {
+    font-size: var(--font-size-sm);
+    width: 100%;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  #dashboard {
+    margin-top: 3rem;
+  }
+
+  #meus-agendamentos {
+    width: 95%;
+    margin: var(--spacing-sm) auto;
+  }
+
+  #lista-agendamentos li {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .cancelar-btn {
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: white;
+    border: none;
+    padding: 0.4rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+}

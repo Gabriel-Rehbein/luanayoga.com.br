@@ -1,0 +1,761 @@
+/* =========================
+   Variáveis CSS para Cores
+   ========================= */
+:root {
+  --color-primary: #476e52;
+  /* Verde escuro usado no header e seções */
+  --color-secondary: #e2a091;
+  /* Tom salmão para destaques e hover */
+  --color-accent: #f4baac;
+  /* Cor clara para botões e indicadores */
+  --color-bg-light: #f5f5f5;
+  /* Fundo claro para banners e planos */
+  --color-bg-white: #ffffff;
+  /* Branco padrão */
+  --color-text-dark: #000000;
+  /* Texto preto padrão */
+  --color-text-light: #ffffff;
+  /* Texto branco */
+  --color-green-hover: #365d43;
+  /* Verde mais escuro para hover */
+  --color-modal-overlay: rgba(0, 0, 0, 0.7);
+  /* Fundo modal escuro com transparência */
+}
+
+/* =========================
+     Reset e Estilos Globais
+     ========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+body {
+  background: var(--color-bg-white);
+  overflow-x: hidden;
+  font-size: 16px;
+  position: relative;
+}
+
+/* =========================
+     Header
+     ========================= */
+.header {
+  width: 100%;
+  height: 110px;
+  background: var(--color-primary);
+  border-bottom: 1px solid var(--color-secondary);
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.logo,
+.logo-empresa {
+  width: 240px;
+  height: 85px;
+}
+
+.logo-empresa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.logo-empresa img:hover {
+  transform: scale(1.05);
+}
+
+/* Navegação principal */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--color-text-light);
+  font-size: 1.4rem;
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.nav-links a:hover {
+  color: var(--color-secondary);
+}
+
+/* =========================
+     Menu Hambúrguer (Mobile)
+     ========================= */
+.menu-toggle {
+  display: none;
+  /* Ativado em responsivo */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  z-index: 110;
+  transition: background 0.3s ease;
+  border-radius: 50%;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.menu-toggle span {
+  display: block;
+  background-color: var(--color-text-light);
+  height: 2px;
+  width: 22px;
+  margin: 3.5px 0;
+  border-radius: 1px;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+/* =========================
+     Conteúdo Principal
+     ========================= */
+.main-content {
+  margin-top: 80px;
+  /* Espaço para o header fixo */
+}
+
+/* =========================
+     Seção Boas-Vindas
+     ========================= */
+.welcome-section {
+  position: relative;
+  height: 90vh;
+  min-height: 500px;
+  background: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.banner-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.welcome-title {
+  color: var(--color-text-dark);
+  font-size: 2.5rem;
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  margin-top: 30px;
+  padding: 0 20px;
+}
+
+/* Faixa branca com título */
+.welcome-banner {
+  width: 100%;
+  height: 150px;
+  background: var(--color-bg-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 15px;
+  text-align: center;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão de Agendamento */
+.schedule-button {
+  width: 280px;
+  height: 50px;
+  background: var(--color-primary);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
+  font-size: 1.3rem;
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  text-decoration: none;
+  margin-top: 2rem;
+  transition: background 0.3s, transform 0.3s ease;
+  position: relative;
+  z-index: 2;
+  padding: 15px 30px;
+  border: none;
+}
+
+.schedule-button:hover {
+  background: var(--color-green-hover);
+  transform: scale(1.05);
+}
+
+/* =========================
+     Seção de Descrição
+     ========================= */
+.description-section {
+  margin-top: 7rem;
+  text-align: center;
+}
+
+.description-text {
+  color: var(--color-text-dark);
+  font-size: 1.3rem;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 400;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+  max-width: 1000px;
+}
+
+/* =========================
+     Seções Genéricas
+     ========================= */
+.section {
+  padding: 4rem 5%;
+  position: relative;
+}
+
+/* =========================
+     Slider (Carrossel)
+     ========================= */
+.slider-section {
+  padding: 4rem 5%;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.slider-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 100%;
+}
+
+.slide {
+  min-width: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Botões do slider */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-accent);
+  color: var(--color-text-light);
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 10;
+  transition: all 0.3s;
+}
+
+.slider-btn:hover {
+  background: var(--color-secondary);
+}
+
+.prev-btn {
+  left: 10px;
+}
+
+.next-btn {
+  right: 10px;
+}
+
+/* Indicadores do slider */
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dot.active {
+  background: var(--color-accent);
+}
+
+/* =========================
+     Seção Sobre
+     ========================= */
+.sobre-section {
+  background-color: var(--color-primary);
+  padding: 40px 20px;
+  margin: 150px 0;
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+.sobre-container {
+  height: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sobre-texto-imagem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  flex-wrap: wrap;
+}
+
+.sobre-imagem img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.sobre-texto {
+  max-width: 680px;
+  text-align: left;
+}
+
+.sobre-texto p {
+  font-size: 1.5em;
+  line-height: 1.6;
+}
+
+/* =========================
+     Seção Contato
+     ========================= */
+.contact-section {
+  background: var(--color-primary);
+  padding: 4rem 5%;
+}
+
+.contact-title {
+  color: var(--color-accent);
+  font-size: 2.5rem;
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  text-align: center;
+}
+
+.phone {
+  color: var(--color-text-light);
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.social-title {
+  color: var(--color-secondary);
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Ícones sociais */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--color-bg-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.social-icon:hover {
+  background: var(--color-accent);
+  color: var(--color-bg-white);
+}
+
+/* =========================
+     Rodapé
+     ========================= */
+.footer-menu {
+  height: 80px;
+  background: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.footer-menu a {
+  color: var(--color-text-dark);
+  font-size: 1.3rem;
+  font-family: "Kalam", cursive;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-menu a:hover {
+  color: var(--color-bg-white);
+}
+
+.footer-final {
+  height: 80px;
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature {
+  color: var(--color-bg-white);
+  font-size: 1rem;
+}
+
+/* =========================
+     Títulos de Seção
+     ========================= */
+.section-title {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+#planos .section-title {
+  margin-top: 6rem;
+}
+
+/* =========================
+     Planos
+     ========================= */
+.planos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.plano-banner {
+  display: flex;
+  flex-direction: row;
+  background: var(--color-bg-light);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.plano-banner.reverse {
+  flex-direction: row-reverse;
+}
+
+.plano-img {
+  width: 50%;
+  min-height: 550px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.plano-info {
+  width: 50%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  background-color: var(--color-bg-light);
+  font-family: "Kalam", cursive;
+}
+
+.plano-info h3 {
+  font-size: 1.6rem;
+}
+
+.plano-info h4 {
+  font-size: 1.3rem;
+}
+
+.plano-info p {
+  font-size: 1.4rem;
+}
+
+/* Botão para planos */
+.btn-plano {
+  display: inline-block;
+  background: var(--color-secondary);
+  color: var(--color-bg-white);
+  padding: 12px 20px;
+  margin-top: 1rem;
+  border-radius: 30px;
+  font-family: "Kalam", cursive;
+  font-size: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn-plano:hover {
+  background: #d08074;
+}
+
+/* =========================
+     Modal de Login
+     ========================= */
+.login-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-modal-overlay);
+  margin-bottom: 20px;
+}
+
+.modal-content {
+  background: var(--color-bg-white);
+  margin: 10% auto;
+  padding: 25px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  position: relative;
+  animation: modalFadeIn 0.3s;
+}
+
+.modal-content h2 {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close-modal {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #888;
+}
+
+.close-modal:hover {
+  color: var(--color-primary);
+}
+
+/* =========================
+     Formulário de Login
+     ========================= */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#loginForm input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+#loginForm button {
+  background: var(--color-primary);
+  color: var(--color-bg-white);
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+#loginForm button:hover {
+  background: #53805f;
+}
+
+/* Links de cadastro e recuperação de senha */
+.forgot-password {
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  color: var(--color-primary);
+}
+
+.auth-form a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+.auth-form a:hover {
+  text-decoration: underline;
+}
+
+.auth-form input:focus {
+  border-color: var(--color-secondary) !important;
+  outline: none;
+}
+
+/* =========================
+     Página de autenticação (Login e Recuperação)
+     ========================= */
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 95vh;
+  margin-top: 70px;
+  background-color: #f8f9fa;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.auth-page h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+.auth-page .auth-form {
+  background-color: var(--color-bg-white);
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-page .auth-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.auth-page .auth-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.auth-page .auth-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--color-secondary);
+  color: var(--color-bg-white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-page .auth-form button:hover {
+  background-color: #d08074;
+}
+
+.auth-form .login-trigger {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+   /* ================
+    Modal das fichas  
+    ==================*/
+.conteudo-fichas-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-top: 1rem;
+}
+.ficha-individual {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.ficha-individual h4 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+.ficha-individual p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../imagens/logoaba.png" type="image/png" />
+    <title>Dashboard - Luana Moreira</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Montserrat+Alternates:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/paginas.css" />
+    <link rel="stylesheet" href="../css/responsivo.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="header">
+        <a href="../index.html">
+            <div class="logo-empresa">
+                <img src="../imagens/logo.webp" alt="Logo da empresa" />
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="ativo">Dashboard</a>
+            <a id="btn-sair" style="cursor: pointer;">Sair</a>
+        </nav>
+        <div class="menu-toggle" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+    <main class="container" id="dashboard">
+      <section class="card">
+        <h2>Editar Perfil</h2>
+        <form class="auth-form" id="form-perfil">
+          <label>Nome: <input type="text" name="nome" required /></label>
+          <label>E-mail: <input type="email" name="email" required /></label>
+          <label>Nova Senha: <input type="password" name="senha" placeholder="Deixe em branco para não alterar" /></label>
+          <button type="submit">Salvar Alterações</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Configurar Disponibilidade</h2>
+        <p>Selecione um horário no calendário para criar um novo slot disponível. Clique em um evento existente para editar ou excluir.</p>
+        <div id="calendario-disponibilidade"></div>
+        <p style="margin-top: 1rem;">
+          <span class="legend green" style="background-color: #27ae60; display: inline-block; width: 15px; height: 15px; border-radius: 3px; vertical-align: middle;"></span> Disponível &nbsp;
+          <span class="legend gray" style="background-color: #7f8c8d; display: inline-block; width: 15px; height: 15px; border-radius: 3px; vertical-align: middle;"></span> Indisponível/Agendado
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Ficha dos Clientes</h2>
+        <div id="lista-clientes">
+          <p>Carregando clientes...</p>
+        </div>
+      </section>
+
+      <div id="modalEditar" class="modal" style="display: none">
+        <div class="modal-content">
+          <h3>Editar Disponibilidade</h3>
+          <p id="infoEvento"></p>
+          <label>
+            Status:
+            <select id="selectStatus">
+              <option value="disponivel">Disponível</option>
+              <option value="indisponivel">Indisponível</option>
+            </select>
+          </label>
+          <div style="margin-top: 1rem">
+            <button id="btnSalvarEdicao">Salvar</button>
+            <button id="btnAbrirModalExcluir" style="background-color: #e74c3c;">Excluir Horário</button>
+            <button id="btnCancelarEdicao" type="button">Cancelar</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="modalExcluir" class="modal" style="display: none">
+        <div class="modal-content">
+          <h3>Excluir Disponibilidade</h3>
+          <p>Tem certeza que deseja excluir este horário da sua agenda? Esta ação não pode ser desfeita.</p>
+          <div style="margin-top: 1rem">
+            <button id="btnConfirmarExcluir">Sim, Excluir</button>
+            <button id="btnCancelarExcluir" type="button">Não, Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="modalVerFichas" class="modal">
+        <div class="modal-content">
+          <span class="close-modal" id="fecharModalFichas">&times;</span>
+          <h3 id="nomeClienteModal">Fichas de Anamnese</h3>
+          <div id="conteudoFichas" class="conteudo-fichas-container">
+            </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-final">
+        <p class="signature">Luana Moreira Fisioterapia e Hatha Yoga</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/pt-br.js"></script>
+    
+    <script src="../js/config.js"></script>
+    <script src="../js/index.js"></script> <script src="../js/dashboard.js"></script> </body>
+</html>

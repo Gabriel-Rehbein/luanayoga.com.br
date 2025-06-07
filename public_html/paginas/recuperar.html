@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../imagens/logoaba.png" type="image/png" />
+    <title>Recuperar Senha - Luana Moreira</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Montserrat+Alternates:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/paginas.css" />
+    <link rel="stylesheet" href="../css/responsivo.css" />
+</head>
+<body>
+    <header class="header">
+        <a href="../index.html">
+            <div class="logo-empresa">
+                <img src="../imagens/logo.webp" alt="Logo da empresa" />
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="../index.html">Início</a>
+            <a href="planos.html">Planos</a>
+            <a href="agenda.html">Agenda</a>
+            <a href="../index.html#sobre">Sobre</a>
+            <a href="../index.html#contato">Contato</a>
+        </nav>
+        <div class="menu-toggle" id="hamburger">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <h1>Redefinir Senha</h1>
+        <p>Digite seu e-mail abaixo. Se ele estiver em nosso sistema, enviaremos um link para você criar uma nova senha.</p>
+        
+        <form class="auth-form" id="formRecuperar">
+            <div id="mensagemRecuperar" class="mensagem-form"></div>
+
+            <label for="email">Seu e-mail cadastrado</label>
+            <input type="email" id="email" name="email" required />
+
+            <button type="submit">Enviar link de recuperação</button>
+            
+            <p style="margin-top: 1rem;">
+                Lembrou sua senha? <a href="login.html">Voltar para o login</a>
+            </p>
+        </form>
+    </main>
+    
+    <footer>
+        <div class="footer-final">
+            <p class="signature">Luana Moreira Fisioterapia e Hatha Yoga</p>
+        </div>
+    </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/index.js"></script>    
+  <script src="../js/recuperar.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>Add commentMore actions
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../imagens/logoaba.png" type="image/png" />
+    <title>Luana Moreira - Fisioterapia e Hatha Yoga</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Montserrat+Alternates:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsivo.css" />
+  </head>
+  <body>
+    <!-- Header com menu hamburguer -->
+    <header class="header">
+      <div class="logo-empresa">
+        <img src="imagens/logo.webp" alt="Logo da empresa" />
+      </div>
+      <nav class="nav-links">
+        <a href="paginas/planos.html">Planos</a>
+        <a href="paginas/agenda.html">Agenda</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+        <a href="#" id="btn-login" class="login-trigger">Entrar</a>
+        <a id="btn-sair">Sair</a>
+      </nav>
+      <div class="menu-toggle" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+      <!-- Seção de boas-vindas -->
+      <section class="welcome-container">
+        <div class="welcome-banner">
+          <h1 class="welcome-title">Bem-vindo(a) ao mundo do Hatha Yoga!</h1>
+        </div>
+        <div class="welcome-section">
+          <img src="imagens/agendeaqui.jpg" alt="Banner" class="banner-bg" />
+          <a href="paginas/agenda.html" class="schedule-button"
+            >Agende sua aula</a
+          >
+        </div>
+      </section>
+
+      <!-- Seção de descrição -->
+      <section class="description-section">
+        <p class="description-text">
+          As práticas de yoga estão voltadas para melhora da força e
+          flexibilidade, melhora do sono controle da ansiedade e estresse,
+          controle respiratório e meditação.
+        </p>
+        <p class="description-text">
+          Prática enérgica de asana (postura) com práticas mais sutis, como
+          pranayama (exercícios respiratórios) e meditação, além de ensinamentos
+          da tradição do yoga.
+        </p>
+      </section>
+
+      <!-- No index.html, modifique a seção do slider -->
+      <section class="slider-section">
+        <h2 class="section-title">Nossas Práticas</h2>
+        <div class="slider-container">
+          <div class="slider">
+            <div class="slide">
+              <img src="imagens/yoga1.jpg" alt="Prática de Yoga 1" />
+            </div>
+            <div class="slide">
+              <img src="imagens/yoga2.jpg" alt="Prática de Yoga 2" />
+            </div>
+            <div class="slide">
+              <img src="imagens/yoga3.jpg" alt="Prática de Yoga 3" />
+            </div>
+          </div>
+          <button class="slider-btn prev-btn">&lt;</button>
+          <button class="slider-btn next-btn">&gt;</button>
+        </div>
+        <div class="slider-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </section>
+
+      <section class="sobre-section" id="sobre">
+        <div class="sobre-container">
+          <h2 class="section-title">Sobre</h2>
+          <div class="sobre-texto-imagem">
+            <div class="sobre-imagem">
+              <img src="imagens/luana.jpg" alt="Luana Moreira" />
+            </div>
+            <div class="sobre-texto">
+              <p>
+                Eu sou Luana Moreira, formada há mais de 15 anos em fisioterapia
+                sou especialista em movimento humano. Sou expertise em desordens
+                musculares e dores crônica relacionados a coluna vertebral e a
+                postura.
+                <br /><br />
+                Sou instrutora de yoga e praticante há um bom tempo, tenho cursos
+                com certificações e acredito que eu possa contribuir bastante
+                para a sua prática!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção de contato -->
+      <section class="section contact-section" id="contato">
+        <h2 class="contact-title">Contato</h2>
+        <h3 class="social-title">Siga-me nas redes sociais!</h3>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/yogini_luana/" class="social-icon"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/luana-moreira-8932171a3/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            class="social-icon"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+      <div class="footer-menu">
+        <a href="paginas/planos.html">Planos</a>
+        <a href="paginas/agenda.html">Agenda</a>
+        <a href="#sobre">Sobre</a>
+      </div>
+      <div class="footer-final">
+        <p class="signature">Luana Moreira Fisioterapia e Hatha Yoga</p>
+      </div>
+    </footer>
+
+    <!-- Modal de Login -->
+    <div class="login-modal" id="loginModal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Login</h2>
+        <form class="auth-form" id="loginForm">
+          <label for="modalEmail">E-mail</label>
+          <input type="email" id="modalEmail" name="email" required />
+
+          <label for="modalSenha">Senha</label>
+          <input
+            type="password"
+            id="modalSenha"
+            name="senha"
+            autocomplete="current-password"
+            placeholder="Digite sua senha"
+          />
+
+          <button type="submit">Entrar</button>
+          <p>
+            <a href="paginas/cadastro.html" class="forgot-password">Cadastre-se agora</a>
+            <a href="paginas/recuperar.html" class="forgot-password"
+              >Esqueci minha senha</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+  </body>
+
+  <script src="./js/config.js"></script>
+  <script src="./js/index.js"></script>
+</html>

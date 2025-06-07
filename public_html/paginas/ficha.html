@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="../imagens/logoaba.png" type="image/png" />
+    <title>Ficha de Anamnese - Luana Moreira</title>
+
+    <!-- Fontes e ícones -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Montserrat+Alternates:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/paginas.css" />
+    />
+    <link rel="stylesheet" href="../css/responsivo.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Header com menu -->
+    <header class="header">
+      <a href="../index.html">
+        <div class="logo-empresa">
+          <img src="../imagens/logo.webp" alt="Logo da empresa" />
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Início</a>
+        <a href="planos.html">Planos</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="../index.html#sobre">Sobre</a>
+        <a href="../index.html#contato">Contato</a>
+        <a href="#" class="login-trigger">Login</a>
+      </nav>
+      <div class="menu-toggle" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </header>
+
+    <main class="ficha-container">
+      <h2>Ficha de Anamnese</h2>
+
+      <form id="fichaAnamneseForm" autocomplete="off">
+        <label for="nome">Nome completo *</label>
+        <input id="nome" name="nome" type="text" required />
+
+        <label for="idade">Idade</label>
+        <input id="idade" name="idade" type="number" min="0" />
+
+        <label for="estado_civil">Estado civil</label>
+        <input id="estado_civil" name="estado_civil" type="text" />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" />
+
+        <label for="nascimento">Data de nascimento</label>
+        <input id="nascimento" name="nascimento" type="date" />
+
+        <label for="telefone">Telefone</label>
+        <input id="telefone" name="telefone" type="text" />
+
+        <label for="praticou_yoga">Já praticou yoga?</label>
+        <select id="praticou_yoga" name="praticou_yoga">
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+
+        <label for="coluna">Problemas na coluna?</label>
+        <textarea id="coluna" name="coluna"></textarea>
+
+        <label for="cirurgias">Cirurgias nos últimos 10 anos?</label>
+        <textarea id="cirurgias" name="cirurgias"></textarea>
+
+        <label for="atividade_fisica">Faz atividade física?</label>
+        <select
+          id="atividade_fisica"
+          name="atividade_fisica"
+          onchange="toggleQualAtividade()"
+          required
+        >
+          <option value="">Selecione</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+
+        <div id="campo_qual_atividade" style="display: none">
+          <label for="qual_atividade">Qual atividade física?</label>
+          <input
+            type="text"
+            id="qual_atividade"
+            name="qual_atividade"
+            placeholder="Ex: caminhada, musculação, pilates..."
+          />
+        </div>
+
+        <label for="plano">Escolha o plano:</label>
+        <select id="plano" name="plano" required>
+          <option value="">Selecione uma opção</option>
+          <option value="1aula">Uma aula semanal - R$165,00/mês</option>
+          <option value="2aulas">Duas aulas semanais - R$260,00/mês</option>
+          <option value="3aulas">Três aulas semanais - R$320,00/mês</option>
+        </select>
+
+        <input type="hidden" name="data_agendamento" id="data_agendamento" />
+
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+      <div class="footer-menu">
+        <a href="../index.html">Início</a>
+        <a href="planos.html">Planos</a>
+        <a href="agenda.html">Agenda</a>
+      </div>
+      <div class="footer-final">
+        <p class="signature">Luana Moreira Fisioterapia e Hatha Yoga</p>
+      </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/index.js"></script>
+
+    <!-- Conexão com o php de salvar ficha -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('fichaAnamneseForm');
+
+      // Pega a data que foi salva na página da agenda
+      const dataAgendamento = localStorage.getItem('data_agendamento');
+      if (dataAgendamento) {
+        document.getElementById('data_agendamento').value = dataAgendamento;
+      } else {
+        alert('Nenhuma data de agendamento selecionada. Por favor, volte para a agenda e escolha um horário.');
+      }
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const dados = Object.fromEntries(formData.entries());
+
+        fetch(`${API_URL}/php/salvar_ficha.php`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dados),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.sucesso) {
+            alert(data.mensagem);
+            localStorage.removeItem('data_agendamento');
+            window.location.href = '../index.html';
+          } else {
+            alert('Erro: ' + data.mensagem);
+          }
+        })
+        .catch(error => {
+          console.error('Erro na requisição:', error);
+          alert('Ocorreu um erro de comunicação. Tente novamente.');
+        });
+      });
+    });
+  </script>
+  </body>
+</html>

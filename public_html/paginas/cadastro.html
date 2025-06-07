@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../imagens/logoaba.png" type="image/png" />
+    <title>Cadastro - Luana Moreira</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Montserrat+Alternates:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/paginas.css" />
+    <link rel="stylesheet" href="../css/responsivo.css" />
+</head>
+
+<body>
+    <header class="header">
+        <a href="../index.html">
+            <div class="logo-empresa">
+                <img src="../imagens/logo.webp" alt="Logo da empresa" />
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="../index.html">Início</a>
+            <a href="planos.html">Planos</a>
+            <a href="agenda.html">Agenda</a>
+            <a href="../index.html#sobre">Sobre</a>
+            <a href="../index.html#contato">Contato</a>
+            <a href="#" id="btn-login" class="login-trigger">Entrar</a>
+            <a id="btn-sair" style="display: none; cursor: pointer;">Sair</a>
+        </nav>
+        <div class="menu-toggle" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <h1>Cadastro de Novo Paciente</h1>
+
+        <form class="auth-form" id="formCadastro">
+            <div id="mensagemCadastro" class="mensagem-form"></div>
+
+            <label for="cadastroNome">Nome completo *</label>
+            <input type="text" id="cadastroNome" name="nome" placeholder="Seu nome completo" required />
+
+            <label for="cadastroEmail">E-mail *</label>
+            <input type="email" id="cadastroEmail" name="email" placeholder="seuemail@exemplo.com" required />
+
+            <label for="cadastroTelefone">Telefone (Opcional)</label>
+            <input type="tel" id="cadastroTelefone" name="telefone" placeholder="(XX) XXXXX-XXXX" />
+
+            <label for="cadastroSenha">Senha *</label>
+            <input type="password" id="cadastroSenha" name="senha" placeholder="Mínimo 6 caracteres" required />
+
+            <label for="cadastroConfirmarSenha">Confirmar Senha *</label>
+            <input type="password" id="cadastroConfirmarSenha" name="confirmar_senha" placeholder="Confirme sua senha" required />
+
+            <button type="submit">Cadastrar</button>
+
+            <p style="margin-top: 1rem; text-align: center;">
+                Já tem uma conta? 
+                <a href="login.html">Faça login</a>
+            </p>
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer-menu">
+            <a href="../index.html">Início</a>
+            <a href="planos.html">Planos</a>
+            <a href="agenda.html">Agenda</a>
+        </div>
+        <div class="footer-final">
+            <p class="signature">Luana Moreira Fisioterapia e Hatha Yoga</p>
+        </div>
+    </footer>
+
+    <div class="login-modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Login</h2>
+            <form class="auth-form" id="loginForm">
+                <label for="modalEmail">E-mail</label>
+                <input type="email" id="modalEmail" name="email" required autocomplete="email" />
+                <label for="modalSenha">Senha</label>
+                <input type="password" id="modalSenha" name="senha" autocomplete="current-password" required />
+                <button type="submit">Entrar</button>
+                <p><a href="recuperar.html" class="forgot-password">Esqueci minha senha</a></p>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../js/config.js"></script>
+    <script src="../js/index.js"></script> 
+    <script src="../js/cadastro.js"></script> 
+</body>
+</html>

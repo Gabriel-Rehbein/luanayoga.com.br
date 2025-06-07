@@ -1,0 +1,293 @@
+/* Estilos para o Calendário */
+.agenda-modern {
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+#calendar {
+  color: #333;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho com botões (prev, next, today) */
+.fc-toolbar {
+  margin-bottom: 20px;
+}
+.fc .fc-toolbar button {
+  background-color: #e2a091 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 6px 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  transition: background-color 0.3s ease;
+}
+
+.fc .fc-toolbar button:hover {
+  background-color: rgb(218, 145, 128) !important;
+}
+
+.fc .fc-toolbar button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(226, 160, 145, 0.6) !important;
+}
+
+/* Botão ativo */
+.fc .fc-toolbar button.fc-button-active {
+  background-color: rgb(218, 145, 128) !important;
+}
+
+/* Título do calendário */
+.fc .fc-toolbar-title {
+  color: #e2a091 !important;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+/* Cabeçalho dos dias da semana */
+.fc-col-header-cell-cushion {
+  color: #e2a091 !important;
+  font-weight: 700;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+/* Dias do mês */
+.fc-daygrid-day-number {
+  font-weight: 600;
+  color: #e2a091;
+}
+
+/* Eventos no calendário */
+.fc-daygrid-event {
+  background-color: #e2a091 !important;
+  border-radius: 8px !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 3px 6px !important;
+  font-size: 0.9rem !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tooltip dos eventos ao passar o mouse */
+.fc-daygrid-event:hover {
+  background-color: rgb(218, 145, 128) !important;
+}
+
+/* Para melhorar o contraste e acessibilidade */
+.fc-daygrid-day:hover {
+  background-color: #f9e6e1 !important;
+  cursor: pointer;
+}
+
+.ficha-container {
+  max-width: 700px;
+  margin: 100px auto 40px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Montserrat Alternates", sans-serif;
+  color: #333;
+}
+
+.ficha-container h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #d08074;
+  font-family: "Kalam", cursive;
+}
+
+.ficha-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ficha-container label {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.ficha-container input,
+.ficha-container select,
+.ficha-container textarea {
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: "Montserrat Alternates", sans-serif;
+  transition: border 0.2s;
+}
+
+.ficha-container input:focus,
+.ficha-container select:focus,
+.ficha-container textarea:focus {
+  border-color: #e2a091;
+  outline: none;
+}
+
+.ficha-container textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.ficha-container button {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #476e52;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.ficha-container button:hover {
+  background-color: #375740;
+}
+
+#meus-agendamentos {
+  display: none; /* já está no inline, mantido */
+  padding: 4rem 5%;
+  margin: 6% auto;
+  width: 60%;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#meus-agendamentos h2 {
+  font-size: 2rem;
+  font-family: "Kalam", cursive;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+#lista-agendamentos li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.5rem 2rem;
+  background-color: white;
+  border-radius: 10px;
+  border-left: 6px solid #e2a091;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-family: "Montserrat Alternates", sans-serif;
+  margin-bottom: 1rem;
+}
+
+#lista-agendamentos li span {
+  font-size: 1rem;
+  color: #444;
+}
+
+#lista-agendamentos li span strong {
+  color: #476e52;
+}
+
+.cancelar-btn {
+  align-self: flex-start;
+  background: #e2a091;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-family: "Kalam", cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.cancelar-btn:hover {
+  background: #d08074;
+}
+
+/* ============================
+   Página Dashboard 
+============================= */
+#dashboard {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 8rem;
+  padding: 1rem 8%;
+}
+
+.container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.card {
+  background-color: #f4f4f4;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.ficha-cliente {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.legend {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+}
+
+.green {
+  background-color: #27ae60;
+}
+
+.gray {
+  background-color: #7f8c8d;
+}
+
+#dashboard .auth-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+#dashboard .auth-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--color-secondary);
+  color: var(--color-bg-white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#dashboard .auth-form button:hover {
+  background-color: #d08074;
+}
