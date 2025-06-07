@@ -136,9 +136,9 @@ document.addEventListener("DOMContentLoaded", function () {
           if (data.sucesso) {
             const base = getBasePath();
             if (data.admin) {
-              window.location.href = base + "dashboard.html";
+              window.location.href = base + "paginas/dashboard.html";
             } else {
-              window.location.href = base + "agenda.html";
+              window.location.href = base + "paginas/agenda.html";
             }
           } else {
             alert("Erro no login: " + data.mensagem);

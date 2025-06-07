@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         mensagemCadastroEl.textContent = data.mensagem + " Você será redirecionado para a página de login em 3 segundos.";
                         mensagemCadastroEl.classList.add('sucesso');
                         formCadastro.reset();
-                        setTimeout(() => { window.location.href = 'cadastro.html'; }, 3000);
+                        setTimeout(() => { window.location.href = 'index.html'; }, 3000);
                     } else {
                         mensagemCadastroEl.textContent = data.mensagem;
                         mensagemCadastroEl.classList.add('erro');
