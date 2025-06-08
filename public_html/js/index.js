@@ -59,9 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loginLinks.forEach((link) => {
     link.addEventListener("click", openModal);
-    if (link.getAttribute("href") === "paginas/login.html") {
-      link.removeAttribute("href");
-    }
   });
 
   closeBtn.addEventListener("click", closeModal);
@@ -132,18 +129,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return res.json(); 
       })
-        .then((data) => {
+    
+    .then((data) => {
           if (data.sucesso) {
-            const base = getBasePath();
             if (data.admin) {
-              window.location.href = base + "paginas/dashboard.html";
+            window.location.href = "https://luanayoga.com.br/paginas/dashboard.html";
             } else {
-              window.location.href = base + "paginas/agenda.html";
+            window.location.href = "https://luanayoga.com.br/paginas/agenda.html";
             }
           } else {
             alert("Erro no login: " + data.mensagem);
           }
         })
+        
       .catch((err) => {
         console.error("Erro na requisição ou processamento:", err);
         alert(err.message || "Erro ao tentar se conectar ao servidor."); 
@@ -259,7 +257,6 @@ document.addEventListener("DOMContentLoaded", function () {
       eventDataTransform: function(eventInfo) {
         return {
           id: eventInfo.id,
-          title: 'Disponível', 
           start: eventInfo.start,
           allDay: eventInfo.allDay, 
           extendedProps: eventInfo.extendedProps 
