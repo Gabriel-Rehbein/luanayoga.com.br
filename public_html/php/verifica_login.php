@@ -1,18 +1,9 @@
 <?php
-header("Access-Control-Allow-Origin: https://luanayoga.com.br");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
+require 'conexao.php'; 
 
-// Responde à requisição OPTIONS imediatamente
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(204);
-    exit;
-}
+header('Content-Type: application/json');
 
-session_start();
-require 'conexao.php';
-
+// --- LÓGICA PARA VERIFICAR SESSÃO EXISTENTE (MÉTODO GET) ---
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_SESSION['paciente_id'])) {
         echo json_encode([
@@ -27,10 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     exit;
 }
 
+// --- LÓGICA PARA PROCESSAR TENTATIVA DE LOGIN (MÉTODO POST) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     $email_do_formulario = $input['email'] ?? '';
-    $senha_do_formulario = isset($input['senha']) ? trim($input['senha']) : '';
+    $senha_do_formulario = isset($input['senha']) ? trim($input['senha']) : ''; 
 
     if (empty($email_do_formulario) || empty($senha_do_formulario)) {
         http_response_code(400);
@@ -54,20 +46,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'admin' => $_SESSION['is_admin']
             ]);
         } else {
-            http_response_code(401);
-            echo json_encode([
-                'sucesso' => false,
-                'mensagem' => $paciente
-                    ? 'E-mail ou senha inválidos. (Senha não confere)'
-                    : 'E-mail ou senha inválidos. (Usuário não encontrado)'
-            ]);
+            http_response_code(401); 
+            echo json_encode(['sucesso' => false, 'mensagem' => 'E-mail ou senha inválidos.']);
         }
     } catch (PDOException $e) {
-        http_response_code(500);
-        echo json_encode(['sucesso' => false, 'mensagem' => 'Erro no servidor ao tentar fazer login.']);
+        http_response_code(500); 
+        error_log("Erro no login: " . $e->getMessage()); 
+        echo json_encode(['sucesso' => false, 'mensagem' => 'Erro no servidor. Tente novamente mais tarde.']);
     }
     exit;
 }
 
-http_response_code(405);
+http_response_code(405); 
 echo json_encode(['sucesso' => false, 'mensagem' => 'Método não permitido.']);
+?>
