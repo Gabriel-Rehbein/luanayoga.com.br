@@ -1,45 +1,44 @@
 <?php
-header("Access-Control-Allow-Origin: https://luanayoga.com.br");
-header("Access-Control-Allow-Methods: GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
-
-// Resposta imediata a requisições OPTIONS (CORS preflight)
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(204);
-    exit;
-}
-
-session_start();
 require 'conexao.php';
 
+header('Content-Type: application/json');
+
 if (!isset($_SESSION['paciente_id'])) {
-    http_response_code(401);
-    echo json_encode(['sucesso' => false, 'mensagem' => 'Usuário não autenticado.']);
+    http_response_code(401); // Unauthorized
+    echo json_encode(['sucesso' => false, 'mensagem' => 'Acesso negado. Você precisa estar logado.']);
     exit;
 }
 
-$id_paciente = $_SESSION['paciente_id'];
+$id_usuario_logado = $_SESSION['paciente_id'];
+$is_admin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true;
 $params = [];
 
 $sql = "
-    SELECT
-        DATE(data_agendamento) as data,
-        TIME(data_agendamento) as horario,
-        status,
-        plano,
-        pago
-    FROM agendamentos
-    WHERE id_paciente = ?
+    SELECT 
+        a.id, 
+        p.nome as nome_paciente, 
+        a.data_agendamento, 
+        a.plano, 
+        a.pago,
+        a.status
+    FROM agendamentos a
+    JOIN pacientes p ON a.id_paciente = p.id
 ";
-$params[] = $id_paciente;
 
+// Se não for admin, filtra apenas pelos seus próprios agendamentos
+if (!$is_admin) {
+    $sql .= " WHERE a.id_paciente = ?";
+    $params[] = $id_usuario_logado;
+}
+
+// Adiciona o filtro de data
 if (isset($_GET['data']) && !empty($_GET['data'])) {
-    $sql .= " AND DATE(data_agendamento) = ?";
+    // Se já tiver um WHERE, usa AND. Se não, usa WHERE.
+    $sql .= $is_admin ? " WHERE DATE(a.data_agendamento) = ?" : " AND DATE(a.data_agendamento) = ?";
     $params[] = $_GET['data'];
 }
 
-$sql .= " ORDER BY data_agendamento DESC";
+$sql .= " ORDER BY a.data_agendamento DESC";
 
 try {
     $stmt = $pdo->prepare($sql);
@@ -47,7 +46,10 @@ try {
     $agendamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode($agendamentos);
+
 } catch (PDOException $e) {
-    http_response_code(500);
-    echo json_encode(['sucesso' => false, 'mensagem' => 'Erro ao buscar agendamentos.']);
+    http_response_code(500); // Erro no Servidor
+    error_log("Erro em meus_agendamentos.php: " . $e->getMessage());
+    echo json_encode(['sucesso' => false, 'mensagem' => 'Erro ao carregar os agendamentos.']);
 }
+?>

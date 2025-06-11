@@ -1,4 +1,8 @@
 <?php
+//Este arquivo serve SOMENTE para realiazr testes caso a Luana encontrar problemas no futuro
+//recomendo que quem fizer a manutenção estude mais ele e pesquise como isto será feito
+
+
 // Inicia o teste com uma tela limpa
 echo "<h1>Diagnóstico do Servidor</h1>";
 

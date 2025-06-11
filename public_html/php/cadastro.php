@@ -1,6 +1,4 @@
 <?php
-// backend/php/cadastro.php (Versão Final e Correta)
-
 require 'conexao.php';
 header('Content-Type: application/json');
 

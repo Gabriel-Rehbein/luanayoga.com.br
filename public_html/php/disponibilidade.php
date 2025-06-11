@@ -1,6 +1,4 @@
 <?php
-// backend/php/disponibilidade.php (Versão Unificada e Final)
-
 require 'conexao.php';
 header('Content-Type: application/json');
 

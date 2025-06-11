@@ -26,10 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['is_admin'] = (bool)$paciente['admin'];
 
             echo json_encode([
-                'sucesso' => true,
-                'nome' => $paciente['nome'],
-                'admin' => $_SESSION['is_admin']
-            ]);
+            'logado' => true,
+            'admin' => isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true,
+            'paciente_id' => $_SESSION['paciente_id'],
+            'nome' => $_SESSION['paciente_nome'] ?? 'Visitante' // Adiciona o nome
+        ]);
 
         } else {
             http_response_code(401); // Unauthorized

@@ -1,16 +1,11 @@
 <?php
 require 'conexao.php';
-// Use as próximas duas linhas caso precise depurar o envio de e-mail no futuro
-// require '../vendor/autoload.php'; 
-// use PHPMailer\PHPMailer\PHPMailer;
 
-// Define que a resposta será sempre JSON
 header('Content-Type: application/json');
 
 $dados = json_decode(file_get_contents('php://input'), true);
 $email = $dados['email'] ?? '';
 
-// Validação do e-mail recebido
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400); 
     echo json_encode(['sucesso' => false, 'mensagem' => 'Formato de e-mail inválido.']);
@@ -30,24 +25,33 @@ try {
 
         $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
         $stmt->execute([$email, $token, $expires_at]);
-
-        $linkDeRecuperacao = "http://localhost/https-luanayoga.com.br-/paginas/redefinir_senha.html?token=" . $token;
+        $protocolo = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http");
         
-        // --- LÓGICA DE ENVIO DE E-MAIL (Usando mail() básico como placeholder) ---
-        // Lembre-se que o ideal aqui é usar PHPMailer para garantir a entrega
+        // Pega o host
+        $host = $_SERVER['HTTP_HOST'];
+        
+        // Monta a URL base do frontend.
+        // Na Hostinger, o frontend está na raiz. No seu XAMPP, está dentro de /fullstackLuanaMoreira/frontend/
+        // Para testes locais, você pode precisar ajustar para:
+        // $baseUrl = "{$protocolo}://{$host}/fullstackLuanaMoreira/frontend";
+        $baseUrl = "{$protocolo}://{$host}";
+
+        $linkDeRecuperacao = $baseUrl . "/paginas/redefinir_senha.html?token=" . $token;
+        
+        // --- LÓGICA DE ENVIO DE E-MAIL ---
         $assunto = "Recuperação de Senha - Luana Moreira Fisioterapia";
-        $corpo = "Olá! Você solicitou a redefinição de sua senha. Clique no link a seguir para continuar: " . $linkDeRecuperacao;
-        $headers = "From: nao-responda@luanamoreira.com";
+        $corpo = "Olá!\n\nVocê solicitou a redefinição de sua senha. Se foi você, clique no link a seguir para criar uma nova senha. O link é válido por 1 hora:\n\n" . $linkDeRecuperacao . "\n\nSe não foi você, por favor, ignore este e-mail.";
+        $headers = "From: nao-responda@luanayoga.com.br";
+        
         // mail($email, $assunto, $corpo, $headers); // A função de envio real
     }
 
-    // IMPORTANTE: enviar uma resposta de SUCESSO e genérica para o frontend, boa prática de segurança.
+    // Responde ao frontend com uma mensagem genérica de sucesso por segurança
     echo json_encode(['sucesso' => true, 'mensagem' => 'Se um e-mail correspondente for encontrado em nosso sistema, um link de recuperação foi enviado.']);
     
 } catch (PDOException $e) {
-    // Em caso de erro de banco, não informe o erro detalhado ao usuário.
-    // Opcional: error_log("Erro no processo de recuperação: " . $e->getMessage());
-    // Ainda assim, enviar uma resposta genérica de sucesso para o frontend para não dar pistas.
+    // Para o usuário, a resposta em caso de erro de banco é a mesma por segurança.
+    // error_log("Erro no processo de recuperação: " . $e->getMessage());
     echo json_encode(['sucesso' => true, 'mensagem' => 'Se um e-mail correspondente for encontrado em nosso sistema, um link de recuperação foi enviado.']);
     exit;
 }

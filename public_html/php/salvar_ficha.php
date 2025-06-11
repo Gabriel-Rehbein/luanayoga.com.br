@@ -2,37 +2,35 @@
 require 'conexao.php';
 header('Content-Type: application/json');
 
+// Segurança: Garante que um paciente está logado para poder agendar
 if (!isset($_SESSION['paciente_id'])) {
-    http_response_code(401);
+    http_response_code(401); // Unauthorized
     echo json_encode(['sucesso' => false, 'mensagem' => 'Você precisa estar logado para agendar.']);
     exit;
 }
 
 $dados = json_decode(file_get_contents('php://input'), true);
 
+// Validação dos dados essenciais recebidos
 if (!$dados || !isset($dados['data_agendamento'], $dados['plano'])) {
-    http_response_code(400);
+    http_response_code(400); // Bad Request
     echo json_encode(['sucesso' => false, 'mensagem' => 'Dados incompletos para o agendamento.']);
     exit;
 }
 
 $id_paciente = $_SESSION['paciente_id'];
-$iso_data_agendamento = $dados['data_agendamento']; // Data em formato ISO UTC (ex: ...T12:00:00.000Z)
+$iso_data_agendamento = $dados['data_agendamento'];
 $plano = $dados['plano'];
 
 try {
-    // --- CORREÇÃO DE FUSO HORÁRIO ---
-    $date_obj_utc = new DateTime($iso_data_agendamento);
-    $fuso_horario_local = new DateTimeZone('America/Sao_Paulo');
-    // Converte o objeto de data de UTC para o fuso horário local
-    $date_obj_local = $date_obj_utc->setTimezone($fuso_horario_local);
-    
-    // Formata o objeto para a string no padrão do MySQL DATETIME ('YYYY-MM-DD HH:MM:SS')
-    $mysql_datetime_format = $date_obj_local->format('Y-m-d H:i:s');
-    // -----------------------------------------------------------------------------
+    // Converte a data do formato ISO UTC (do JavaScript) para o formato DATETIME do MySQL no fuso local
+    $date_obj = new DateTime($iso_data_agendamento, new DateTimeZone('UTC'));
+    $date_obj->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+    $mysql_datetime_format = $date_obj->format('Y-m-d H:i:s');
 
+    // Encontra o horário na tabela de disponibilidade para garantir que ele ainda está livre
     $stmtHorario = $pdo->prepare("SELECT id FROM disponibilidade WHERE data_hora = ? AND status = 'disponivel'");
-    $stmtHorario->execute([$mysql_datetime_format]); // <<< Usa a variável corrigida
+    $stmtHorario->execute([$mysql_datetime_format]);
     $horario = $stmtHorario->fetch();
 
     if (!$horario) {
@@ -42,7 +40,7 @@ try {
     }
     $id_disponibilidade = $horario['id'];
 
-    // Inserir os dados da ficha na tabela 'fichas'
+    // Insere os dados da ficha na tabela 'fichas'
     $stmtFicha = $pdo->prepare(
         "INSERT INTO fichas (id_paciente, nome, idade, estado_civil, email, nascimento, telefone, praticou_yoga, coluna, cirurgias, atividade_fisica, qual_atividade, plano) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
@@ -52,17 +50,17 @@ try {
         $dados['cirurgias'] ?? null, $dados['atividade_fisica'] ?? null, $dados['qual_atividade'] ?? null, $plano
     ]);
 
-    // Inserir na tabela de agendamentos
+    // Insere o registro na tabela de agendamentos
     $stmtAgendamento = $pdo->prepare(
-        "INSERT INTO agendamentos (id_paciente, id_disponibilidade, data_agendamento, plano, status) VALUES (?, ?, ?, ?, 'Confirmado')"
+        "INSERT INTO agendamentos (id_paciente, id_disponibilidade, data_agendamento, plano, status, pago) VALUES (?, ?, ?, ?, 'Confirmado', 0)"
     );
     $stmtAgendamento->execute([$id_paciente, $id_disponibilidade, $mysql_datetime_format, $plano]);
 
-    // Marcar o horário como indisponível
+    // Atualiza o status do horário para 'indisponivel'
     $stmtUpdate = $pdo->prepare("UPDATE disponibilidade SET status = 'indisponivel' WHERE id = ?");
     $stmtUpdate->execute([$id_disponibilidade]);
 
-    echo json_encode(['sucesso' => true, 'mensagem' => 'Agendamento e ficha enviados com sucesso! Você será redirecionado.']);
+    echo json_encode(['sucesso' => true, 'mensagem' => 'Agendamento realizado com sucesso!']);
 
 } catch (Exception $e) {
     http_response_code(500);
